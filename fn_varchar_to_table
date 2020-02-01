@@ -1,0 +1,24 @@
+CREATE FUNCTION [dbo].[VarcharToTable] (@InStr NVARCHAR(MAX))
+RETURNS @TempTab TABLE
+   (id UNIQUEIDENTIFIER NOT NULL)
+AS
+BEGIN
+    ;-- Ensure input ends with comma
+    SET @InStr = REPLACE(@InStr + ',', ',,', ',')
+    DECLARE @SP INT
+    DECLARE @VALUE NVARCHAR(MAX)
+    WHILE PATINDEX('%,%', @INSTR ) <> 0 
+    BEGIN
+       SELECT  @SP = PATINDEX('%,%',@INSTR)
+       SELECT  @VALUE = LEFT(@INSTR , @SP - 1)
+       SELECT  @INSTR = STUFF(@INSTR, 1, @SP, '')
+       INSERT INTO @TempTab(id) VALUES (@VALUE)
+    END
+        RETURN
+
+END
+GO
+
+DECLARE @LIST NVARCHAR(MAX)
+SET @LIST = '973150D4-0D5E-4AD0-87E1-037B9D4FC03B,973150d4-0d5e-4ad0-87e1-037b9d4fc03c'
+SELECT Id, Descr FROM TableA WHERE Id IN (SELECT * FROM dbo.VarcharToTable(@LIST))
