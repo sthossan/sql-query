@@ -1,0 +1,7 @@
+WITH CTE AS
+(
+   SELECT *,
+         ROW_NUMBER() OVER (PARTITION BY fieldId1 ORDER BY OrderField DESC) AS RN
+   FROM [dbo].[Table]
+)
+SELECT * FROM CTE
