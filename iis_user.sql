@@ -1,0 +1,10 @@
+CREATE LOGIN [IIS APPPOOL\.NET 4.5]
+FORM WINDOWS WITH DEFAULT_DATABASE=[master]
+DEFAULT_LANGUAGE=[us_english]
+
+GO
+CREATE LOGIN [nw]
+FOR LOGIN [IIS APPPOOL\.NET 4.5]
+GO
+
+EXC sp_addrolmember 'db_datareader','nw'
