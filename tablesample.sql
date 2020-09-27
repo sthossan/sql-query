@@ -15,4 +15,3 @@ select * from results TABLESAMPLE SYSTEM(10 PERCENT) REPEATABLE(1000).
 Given the same seed, you will get the same rows back. One thing to note here: this is not like the
 
 repeatable read isolation level. If another user makes changes to the data in the table, you will not get back the exact same rows. It is only true for a given “version” of the table.
-
