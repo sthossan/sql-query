@@ -11,10 +11,11 @@ ORDER BY    TableName, ColumnName;
 
 -- Search Tables and Views:
 
-SELECT      COLUMN_NAME AS 'ColumnName',TABLE_NAME AS  'TableName'
-FROM        INFORMATION_SCHEMA.COLUMNS
-WHERE       COLUMN_NAME LIKE '%MyName%'
-ORDER BY    TableName, ColumnName;
+SELECT  COLUMN_NAME AS 'ColumnName',TABLE_NAME AS 'TableName', DATA_TYPE, CHARACTER_MAXIMUM_LENGTH
+	    , Query='ALTER TABLE [dbo].['+TABLE_NAME+'] ALTER COLUMN MSISDN VARCHAR(20);'
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE COLUMN_NAME LIKE '%msisdn%' AND CHARACTER_MAXIMUM_LENGTH<>20
+ORDER BY TableName;
 
 
 -- Search SP
@@ -23,3 +24,7 @@ DEFINITION
 FROM sys.sql_modules
 WHERE DEFINITION LIKE '%mycolumnname%'
 GO
+-- realtion in sp
+SELECT Name
+FROM sys.procedures
+WHERE OBJECT_DEFINITION(OBJECT_ID) LIKE '%TableNameOrWhatever%'

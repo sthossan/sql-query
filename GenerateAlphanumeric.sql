@@ -13,3 +13,7 @@
 	IF @pass NOT LIKE '%[0-9]%' AND @pass NOT LIKE '%[A-Z]%' AND @pass NOT LIKE '%[a-z]%' AND @pass NOT LIKE '%[!@#$&?%]%'
 	   GOTO TryAgain
 	SELECT @pass
+
+
+-- SELECT SUBSTRING(CONVERT(varchar(255), NEWID()), 0, 7)
+
