@@ -1,4 +1,5 @@
-The tablesample returns a random number every time as the seed used to generate the random number varies marginally everytime, eventhough we say tablesample(10 percent) it will reutrn +1000 or -1000 rows approximatly,
+The tablesample returns a random number every time as the seed used to generate the random number varies marginally everytime, 
+eventhough we say tablesample(10 percent) it will reutrn +1000 or -1000 rows approximatly,
 
 example : 
 
